@@ -1,53 +1,343 @@
-Una escuela implementó reuniones mensuales entre profesores y dos representantes estudiantiles de cada curso, con el objetivo de mejorar el clima escolar. 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuadernillo Digital | Aula</title>
+<style>
+:root{--ink:#172033;--muted:#697386;--line:#e5e9f2;--paper:#fff;--bg:#f4f6fb;--primary:#5b5ce2;--primary2:#7778f2;--teal:#13a89e;--soft:#eeefff;--shadow:0 12px 34px rgba(27,39,74,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer;border:0}
+.topbar{background:linear-gradient(115deg,#20254b,#4546a8 68%,#6869e9);color:#fff;padding:22px clamp(18px,4vw,52px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:13px}.logo{width:46px;height:46px;border-radius:15px;background:#ffffff20;display:grid;place-items:center;font-size:24px;border:1px solid #ffffff35}.brand h1{font-size:clamp(20px,3vw,27px);margin:0;letter-spacing:-.6px}.brand p{margin:3px 0 0;color:#e1e3ff;font-size:13px}
+.top-actions{display:flex;gap:9px;flex-wrap:wrap}.btn{padding:10px 14px;border-radius:11px;font-weight:650;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:7px}.btn:hover{transform:translateY(-1px)}.btn-light{background:#fff;color:#30347d}.btn-glass{background:#ffffff18;border:1px solid #ffffff45;color:#fff}.btn-primary{background:var(--primary);color:#fff}.btn-outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn-danger{background:#fff0f0;color:#b83242}
+main{max-width:1500px;margin:0 auto;padding:26px clamp(14px,3vw,38px) 40px}.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:20px;flex-wrap:wrap}.intro h2{margin:0;font-size:25px;letter-spacing:-.7px}.intro p{color:var(--muted);margin:5px 0 0}.status{font-size:12px;color:#16836e;background:#e2f8f1;border-radius:30px;padding:7px 11px;display:flex;gap:7px;align-items:center}.dot{width:7px;height:7px;background:#16a085;border-radius:50%}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr) 330px;gap:18px;align-items:start}.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:17px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px}.panel-head h3{margin:0;font-size:15px}.subtle{color:var(--muted);font-size:12px}.library-body{padding:14px}.upload-zone{border:1.5px dashed #b8bcf8;border-radius:14px;padding:20px 12px;text-align:center;background:#f7f7ff;cursor:pointer;transition:.2s}.upload-zone:hover,.upload-zone.drag{background:#eeeeff;border-color:var(--primary)}.upload-icon{width:43px;height:43px;margin:0 auto 9px;border-radius:13px;background:#e5e6ff;display:grid;place-items:center;font-size:22px}.upload-zone strong{display:block;font-size:13px}.upload-zone p{margin:5px 0 0;color:var(--muted);font-size:12px}.upload-zone input{display:none}.file-list{display:flex;flex-direction:column;gap:7px;margin-top:14px}.file-item{display:flex;align-items:center;gap:10px;padding:11px;border:1px solid transparent;border-radius:12px;cursor:pointer;min-width:0}.file-item:hover{background:#f7f8fc}.file-item.active{background:var(--soft);border-color:#d9d9ff}.pdf-icon{width:37px;height:42px;flex:none;border-radius:8px;background:#fff0f0;color:#d24d5c;display:grid;place-items:center;font-size:11px;font-weight:800;border:1px solid #ffdddd}.file-meta{min-width:0;flex:1}.file-meta strong{font-size:12px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file-meta small{font-size:11px;color:var(--muted)}.remove-file{background:transparent;color:#9aa1b1;padding:4px;font-size:17px;border-radius:7px}.remove-file:hover{background:#ffe8e8;color:#bc3344}.empty-list{text-align:center;color:var(--muted);padding:23px 8px;font-size:12px}
+.viewer{min-width:0}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;flex-wrap:wrap}.doc-title{font-weight:750;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.page-controls{display:flex;align-items:center;gap:8px}.page-controls button{width:33px;height:33px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:18px}.page-controls button:disabled{opacity:.35;cursor:not-allowed}.page-count{font-size:12px;color:var(--muted);min-width:75px;text-align:center}.pdf-stage{background:#e9edf5;min-height:520px;padding:20px;display:flex;align-items:flex-start;justify-content:center;position:relative;overflow:auto}.pdf-stage canvas{display:block;max-width:100%;height:auto!important;box-shadow:0 5px 20px #18213b20;background:#fff}.pdf-page-wrap{position:relative;display:inline-block;line-height:0;box-shadow:0 5px 20px #18213b20;background:#fff}.pdf-overlay{position:absolute;inset:0;line-height:normal;pointer-events:none}.pdf-overlay.placing{pointer-events:auto;cursor:crosshair}.fill-field{position:absolute;min-width:90px;min-height:34px;resize:both;border:1px solid #7778f2;border-radius:4px;background:#fffdf2dd;color:#172033;padding:5px;font:14px/1.3 Arial,sans-serif;pointer-events:auto;box-shadow:0 1px 5px #17203320}.fill-field:focus{outline:2px solid #5b5ce2;background:#fff}.field-delete{position:absolute;top:-9px;right:-9px;width:21px;height:21px;border-radius:50%;background:#c83d4d;color:#fff;font-size:13px;line-height:21px;text-align:center;cursor:pointer;border:0;pointer-events:auto}.place-hint{font-size:12px;color:#4a4bb8;background:#efefff;padding:8px 12px;border-radius:9px;margin:0 0 10px}.pdf-placeholder{min-height:490px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:25px;color:var(--muted)}.placeholder-art{font-size:54px;margin-bottom:12px}.pdf-placeholder h3{color:var(--ink);margin:0 0 6px}.pdf-placeholder p{max-width:330px;margin:0;font-size:13px}.viewer-foot{padding:12px 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+.answers-panel{position:sticky;top:15px}.answer-top{padding:18px 18px 14px}.answer-top h3{margin:0 0 4px;font-size:17px}.answer-top p{margin:0;color:var(--muted);font-size:12px}.page-chip{display:inline-block;background:#efefff;color:#494ac5;padding:5px 9px;border-radius:7px;font-size:11px;font-weight:750;margin-top:12px}.answer-content{padding:0 18px 18px}.field-label{font-size:12px;font-weight:750;display:block;margin:13px 0 7px}.answer-text{width:100%;min-height:225px;resize:vertical;border:1px solid #dfe3ee;border-radius:12px;padding:13px;background:#fcfcff;outline:none;color:var(--ink);line-height:1.6}.answer-text:focus{border-color:#8889ee;box-shadow:0 0 0 3px #5b5ce21a}.answer-text::placeholder{color:#a0a6b5}.save-line{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:9px;font-size:11px;color:var(--muted)}.save-state{display:flex;align-items:center;gap:5px;color:#15836e}.mini-actions{display:flex;gap:8px;margin-top:14px}.mini-actions .btn{flex:1;font-size:12px;padding:9px 8px}.progress-wrap{padding:15px 18px 18px;border-top:1px solid var(--line);margin-top:2px}.progress-title{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px}.progress-title span:last-child{font-weight:800;color:var(--primary)}.progress-bar{height:7px;background:#eceef5;border-radius:20px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#8b8cf9);border-radius:20px;transition:width .3s}.tip{margin-top:14px;background:#f5f8ff;border-radius:11px;padding:11px;font-size:11px;color:#68738b;display:flex;gap:8px}.mobile-tabs{display:none}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;background:#20254b;color:#fff;padding:11px 17px;border-radius:12px;box-shadow:var(--shadow);font-size:13px;pointer-events:none;transition:.25s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}.footnote{text-align:center;color:#9299aa;font-size:11px;margin:20px 0 0}
+@media(max-width:1150px){.layout{grid-template-columns:230px minmax(0,1fr)}.answers-panel{grid-column:2;position:static}.answer-text{min-height:150px}.answer-content{padding-bottom:14px}.pdf-stage{min-height:420px}}
+@media(max-width:720px){.topbar{padding:18px}.top-actions{width:100%}.top-actions .btn{flex:1;font-size:12px;padding:9px}.layout{grid-template-columns:1fr}.library-panel{order:0}.viewer{order:1}.answers-panel{order:2;grid-column:auto;position:static}.library-body{padding:11px}.upload-zone{padding:14px}.file-list{display:grid;grid-template-columns:1fr 1fr}.file-item{padding:8px}.remove-file{display:none}.pdf-stage{padding:10px;min-height:330px}.pdf-placeholder{min-height:310px}.intro h2{font-size:22px}.answer-text{min-height:180px}.panel{border-radius:15px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="logo">📚</div><div><h1>Cuadernillo Digital</h1><p>Un espacio para aprender, responder y avanzar</p></div></div>
+  <div class="top-actions">
+    <button class="btn btn-glass" id="exportBtn">↗ Exportar respuestas</button>
+    <button class="btn btn-light" id="printBtn">▤ Imprimir respuestas</button>
+  </div>
+</header>
+<main>
+  <section class="intro">
+    <div><h2>Mi espacio de actividades</h2><p>Abre tus materiales, lee cada página y escribe tus respuestas.</p></div>
+    <div class="status"><span class="dot"></span> Guardado automático en este dispositivo</div>
+  </section>
+  <div class="layout">
+    <aside class="panel library-panel">
+      <div class="panel-head"><h3>📁 Mis materiales</h3><span class="subtle" id="fileCount">0 archivos</span></div>
+      <div class="library-body">
+        <label class="upload-zone" id="uploadZone" for="pdfInput">
+          <div class="upload-icon">＋</div><strong>Agregar archivos PDF</strong><p>Selecciona uno o varios archivos<br>desde tu computadora</p>
+          <input id="pdfInput" type="file" accept="application/pdf,.pdf" multiple>
+        </label>
+        <div class="file-list" id="fileList"></div>
+        <div class="tip"><span>💡</span><span>Los PDF se leen desde tu equipo. Las respuestas se guardan automáticamente en este navegador.</span></div>
+      </div>
+    </aside>
+    <section class="panel viewer">
+      <div class="toolbar"><div class="doc-title" id="docTitle">Vista del documento</div><div class="page-controls"><button class="btn btn-primary" id="addFieldBtn" type="button" style="width:auto;height:auto;font-size:12px;padding:8px 10px">＋ Campo rellenable</button><button class="btn btn-outline" id="downloadFilledBtn" type="button" style="width:auto;height:auto;font-size:12px;padding:8px 10px">⬇ Descargar PDF</button><button id="prevPage" aria-label="Página anterior" disabled>‹</button><span class="page-count" id="pageCount">Página —</span><button id="nextPage" aria-label="Página siguiente" disabled>›</button></div></div>
+      <div style="padding:0 16px"><div class="place-hint" id="placeHint" hidden>Haz clic en el lugar del PDF donde quieras colocar un campo. Después escribe tu respuesta ahí.</div></div><div class="pdf-stage" id="pdfStage">
+        <div class="pdf-placeholder"><div class="placeholder-art">📝</div><h3>Tu cuadernillo comienza aquí</h3><p>Agrega tus archivos PDF en el panel izquierdo. Después podrás recorrer las páginas y escribir las respuestas a la derecha.</p></div>
+      </div>
+      <div class="viewer-foot"><span id="docInfo">Todavía no hay documentos abiertos</span><span>Usa ‹ y › para cambiar de página</span></div>
+    </section>
+    <aside class="panel answers-panel">
+      <div class="answer-top"><h3>✍️ Mis respuestas</h3><p>Escribe con tus propias palabras. Se guardan mientras trabajas.</p><span class="page-chip" id="answerPageChip">SIN PÁGINA SELECCIONADA</span></div>
+      <div class="answer-content">
+        <label class="field-label" for="studentName">Nombre del estudiante (opcional)</label>
+        <input id="studentName" type="text" placeholder="Escribe tu nombre" style="width:100%;padding:10px 11px;border:1px solid #dfe3ee;border-radius:10px;outline:none;background:#fcfcff">
+        <label class="field-label" for="answerText">Respuesta de esta página</label>
+        <textarea class="answer-text" id="answerText" placeholder="Escribe aquí tu respuesta, procedimiento, reflexión o las ideas principales de la actividad…" disabled></textarea>
+        <div class="save-line"><span class="save-state"><span>●</span><span id="saveStatus">Esperando actividad</span></span><span id="charCount">0 caracteres</span></div>
+        <div class="mini-actions"><button class="btn btn-outline" id="clearAnswer" disabled>Limpiar respuesta</button><button class="btn btn-primary" id="nextAnswer" disabled>Siguiente página →</button></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-title"><span>Mi progreso</span><span id="progressText">0%</span></div><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><div class="subtle" style="margin-top:8px" id="progressDetail">Responde las páginas de tus documentos.</div></div>
+    </aside>
+  </div>
+  <p class="footnote">Tus respuestas se almacenan en este navegador mediante Local Storage. Exporta una copia si vas a cambiar de dispositivo o borrar los datos del navegador.</p>
+</main>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const STORAGE_KEY = 'cuadernilloDigital_v1';
+  let docs = [], activeId = null, pageNum = 1, pdfDoc = null, renderToken = 0, saveTimer = null, toastTimer = null;
+  const answers = {};
+  const fillFields = {};
+  let placingField = false;
+  let studentName = '';
+  if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-Estas reuniones buscan promover la comunicación abierta y abordar problemáticas del aula, pero en una ocasión, la iniciativa desencadenó un conflicto inesperado.
+  function loadSaved(){
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      Object.assign(answers, saved.answers || {});
+      Object.assign(fillFields, saved.fillFields || {});
+      studentName = saved.studentName || '';
+      $('studentName').value = studentName;
+    } catch(e) {}
+  }
+  function persist(){
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({answers, fillFields, studentName, updatedAt:new Date().toISOString()}));
+      $('saveStatus').textContent = 'Guardado en este dispositivo';
+    } catch(e) {
+      $('saveStatus').textContent = 'No se pudo guardar';
+      showToast('El almacenamiento está lleno. Exporta tus respuestas.');
+    }
+    updateProgress();
+  }
+  function showToast(message){
+    $('toast').textContent=message; $('toast').classList.add('show');
+    clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2600);
+  }
+  function keyFor(){return activeId ? activeId+'__'+pageNum : ''}
+  function currentAnswer(){return answers[keyFor()] || ''}
+  function fileLabel(file){return file.name.replace(/\.pdf$/i,'')}
+  function formatSize(bytes){return bytes<1024*1024 ? Math.max(1,Math.round(bytes/1024))+' KB' : (bytes/1024/1024).toFixed(1)+' MB'}
+  function activeDoc(){return docs.find(d=>d.id===activeId)}
+  function renderFileList(){
+    const list=$('fileList'); list.innerHTML='';
+    $('fileCount').textContent=docs.length+' archivo'+(docs.length===1?'':'s');
+    if(!docs.length){list.innerHTML='<div class="empty-list">Tus archivos aparecerán aquí.</div>';return}
+    docs.forEach(doc=>{
+      const item=document.createElement('div');item.className='file-item'+(doc.id===activeId?' active':'');item.title=doc.name;
+      const icon=document.createElement('div');icon.className='pdf-icon';icon.textContent='PDF';
+      const meta=document.createElement('div');meta.className='file-meta';
+      const strong=document.createElement('strong');strong.textContent=doc.name;
+      const small=document.createElement('small');small.textContent=(doc.pages?doc.pages+' páginas · ':'')+formatSize(doc.size);
+      meta.append(strong,small);
+      const remove=document.createElement('button');remove.className='remove-file';remove.textContent='×';remove.title='Quitar archivo';remove.setAttribute('aria-label','Quitar '+doc.name);
+      remove.addEventListener('click',e=>{e.stopPropagation();removeDoc(doc.id)});
+      item.append(icon,meta,remove);item.addEventListener('click',()=>openDoc(doc.id));list.append(item);
+    });
+  }
+  async function addFiles(files){
+    const pdfs=Array.from(files).filter(f=>f.type==='application/pdf'||f.name.toLowerCase().endsWith('.pdf'));
+    if(!pdfs.length){showToast('Selecciona archivos PDF.');return}
+    for(const file of pdfs){
+      const id='pdf_'+file.name.toLowerCase().replace(/[^a-z0-9]+/g,'_')+'_'+file.size;
+      const doc={id,name:file.name,size:file.size,file,pages:0};
+      docs.push(doc);
+      try{
+        if(window.pdfjsLib){
+          const data=await file.arrayBuffer();
+          const pdf=await pdfjsLib.getDocument({data}).promise;
+          doc.pages=pdf.numPages; pdf.destroy();
+        }
+      }catch(e){showToast('No se pudo leer '+file.name+'. Revisa que no esté dañado.');docs=docs.filter(d=>d.id!==id)}
+    }
+    renderFileList();
+    if(docs.length && !activeId) await openDoc(docs[0].id);
+    else if(docs.length) updateProgress();
+    $('pdfInput').value='';
+  }
+  async function openDoc(id){
+    const doc=docs.find(d=>d.id===id);if(!doc)return;
+    activeId=id;pageNum=1;pdfDoc=null;renderFileList();
+    $('docTitle').textContent=doc.name;$('docInfo').textContent='Cargando documento…';
+    $('answerText').disabled=true;$('clearAnswer').disabled=true;$('nextAnswer').disabled=true;
+    $('pdfStage').innerHTML='<div class="pdf-placeholder"><div class="placeholder-art">⏳</div><h3>Abriendo documento…</h3><p>Un momento, por favor.</p></div>';
+    if(!window.pdfjsLib){
+      $('pdfStage').innerHTML='<div class="pdf-placeholder"><div class="placeholder-art">⚠️</div><h3>No se pudo cargar el visor PDF</h3><p>Revisa tu conexión a internet y vuelve a abrir este archivo. La biblioteca PDF se carga desde una CDN.</p></div>';
+      $('docInfo').textContent='Visor PDF no disponible';return;
+    }
+    try{
+      const data=await doc.file.arrayBuffer();
+      pdfDoc=await pdfjsLib.getDocument({data}).promise;
+      doc.pages=pdfDoc.numPages;
+      $('pageCount').textContent='Página 1 de '+doc.pages;
+      $('prevPage').disabled=true;$('nextPage').disabled=doc.pages<=1;
+      $('answerText').disabled=false;$('clearAnswer').disabled=false;$('nextAnswer').disabled=false;
+      await renderPage();renderFileList();updateAnswerPanel();updateProgress();
+    }catch(e){
+      $('pdfStage').innerHTML='<div class="pdf-placeholder"><div class="placeholder-art">⚠️</div><h3>No se pudo abrir el PDF</h3><p>El archivo puede estar dañado o protegido con contraseña.</p></div>';
+      $('docInfo').textContent='Error al abrir el documento';
+    }
+  }
+  async function renderPage(){
+    if(!pdfDoc)return;
+    const token=++renderToken;
+    try{
+      const page=await pdfDoc.getPage(pageNum);if(token!==renderToken)return;
+      const stage=$('pdfStage');stage.innerHTML='';
+      const base=page.getViewport({scale:1});
+      const maxWidth=Math.max(260,stage.clientWidth-40);
+      const scale=Math.min(maxWidth/base.width,1.8);
+      const viewport=page.getViewport({scale});
+      const wrap=document.createElement('div');wrap.className='pdf-page-wrap';wrap.style.width=Math.floor(viewport.width)+'px';wrap.style.height=Math.floor(viewport.height)+'px';
+      const canvas=document.createElement('canvas');const ctx=canvas.getContext('2d');
+      const ratio=window.devicePixelRatio||1;
+      canvas.width=Math.floor(viewport.width*ratio);canvas.height=Math.floor(viewport.height*ratio);
+      canvas.style.width=Math.floor(viewport.width)+'px';canvas.style.height=Math.floor(viewport.height)+'px';
+      ctx.setTransform(ratio,0,0,ratio,0,0);
+      const overlay=document.createElement('div');overlay.className='pdf-overlay'+(placingField?' placing':'');overlay.id='pdfOverlay';
+      overlay.addEventListener('click',e=>{if(!placingField || e.target!==overlay)return;const r=overlay.getBoundingClientRect();addFillField((e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height);});
+      wrap.append(canvas,overlay);stage.appendChild(wrap);
+      await page.render({canvasContext:ctx,viewport}).promise;
+      if(token!==renderToken)return;
+      drawFillFields();
+      $('pageCount').textContent='Página '+pageNum+' de '+pdfDoc.numPages;
+      $('prevPage').disabled=pageNum<=1;$('nextPage').disabled=pageNum>=pdfDoc.numPages;
+      $('docInfo').textContent=pdfDoc.numPages+' páginas · '+formatSize(activeDoc().size);
+      updateAnswerPanel();
+    }catch(e){if(token===renderToken)showToast('No se pudo mostrar esta página.')}
+  }
+  function fieldKey(){return activeId+'__'+pageNum}
+  function fieldsForPage(){return fillFields[fieldKey()] || (fillFields[fieldKey()]=[])}
+  function addFillField(x,y){
+    if(!activeId)return;
+    fieldsForPage().push({x:Math.max(0,Math.min(.92,x)),y:Math.max(0,Math.min(.97,y)),w:.34,h:.065,text:''});
+    persist();drawFillFields();showToast('Campo agregado. Escribe directamente sobre el PDF.');
+  }
+  function drawFillFields(){
+    const overlay=$('pdfOverlay');if(!overlay)return;
+    overlay.classList.toggle('placing',placingField);
+    overlay.innerHTML='';
+    fieldsForPage().forEach((f,index)=>{
+      const box=document.createElement('div');box.style.position='absolute';box.style.left=(f.x*100)+'%';box.style.top=(f.y*100)+'%';box.style.width=(f.w*100)+'%';box.style.height=(f.h*100)+'%';box.style.minWidth='90px';box.style.minHeight='34px';box.style.pointerEvents='none';
+      const ta=document.createElement('textarea');ta.className='fill-field';ta.value=f.text||'';ta.placeholder='Escribe aquí…';ta.setAttribute('aria-label','Respuesta PDF '+(index+1));ta.style.left='0';ta.style.top='0';ta.style.width='100%';ta.style.height='100%';ta.style.boxSizing='border-box';
+      ta.addEventListener('input',()=>{f.text=ta.value;persist();});
+      ta.addEventListener('pointerdown',()=>{if(placingField){placingField=false;updatePlaceMode();}});
+      const del=document.createElement('button');del.className='field-delete';del.type='button';del.textContent='×';del.title='Eliminar campo';del.style.display='none';
+      box.addEventListener('mouseenter',()=>del.style.display='block');box.addEventListener('mouseleave',()=>del.style.display='none');
+      del.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();fieldsForPage().splice(index,1);persist();drawFillFields();});
+      box.append(ta,del);overlay.appendChild(box);
+    });
+  }
+  function updatePlaceMode(){
+    $('placeHint').hidden=!placingField;
+    $('addFieldBtn').textContent=placingField?'Cancelar colocación':'＋ Campo rellenable';
+    $('addFieldBtn').classList.toggle('btn-primary',!placingField);
+    $('addFieldBtn').classList.toggle('btn-danger',placingField);
+    const overlay=$('pdfOverlay');if(overlay)overlay.classList.toggle('placing',placingField);
+  }
+  async function downloadFilledPdf(){
+    const doc=activeDoc();if(!doc){showToast('Primero abre un PDF.');return;}
+    if(!window.PDFLib){showToast('No se pudo cargar el creador de PDF. Revisa tu conexión.');return;}
+    try{
+      const {PDFDocument,StandardFonts,rgb}=PDFLib;
+      const pdfBytes=await doc.file.arrayBuffer();const out=await PDFDocument.load(pdfBytes);const font=await out.embedFont(StandardFonts.Helvetica);
+      for(let p=1;p<=out.getPageCount();p++){
+        const page=out.getPage(p-1),size=page.getSize(),items=fillFields[doc.id+'__'+p]||[];
+        items.forEach(f=>{if(!String(f.text||'').trim())return;const x=f.x*size.width;const y=size.height-(f.y+f.h)*size.height;const maxW=Math.max(30,f.w*size.width-8);const fontSize=Math.max(7,Math.min(12,size.width*.018));
+          const lines=String(f.text).split('\n');let yy=y+size.height*f.h- fontSize-3;
+          lines.forEach(line=>{if(yy<y) return;let txt=line;while(txt.length && font.widthOfTextAtSize(txt,fontSize)>maxW) {let cut=txt.length-1;while(cut>1&&font.widthOfTextAtSize(txt.slice(0,cut),fontSize)>maxW)cut--;page.drawText(txt.slice(0,cut),{x:x+4,y:yy,size:fontSize,font,color:rgb(.08,.1,.17)});txt=txt.slice(cut);yy-=fontSize+2;}if(txt)page.drawText(txt,{x:x+4,y:yy,size:fontSize,font,color:rgb(.08,.1,.17)});yy-=fontSize+2;});
+        });
+      }
+      const bytes=await out.save();const blob=new Blob([bytes],{type:'application/pdf'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=doc.name.replace(/\.pdf$/i,'')+'-contestado.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('PDF contestado descargado.');
+    }catch(e){console.error(e);showToast('No se pudo crear el PDF contestado.');}
+  }
+  function updateAnswerPanel(){
+    const doc=activeDoc();if(!doc)return;
+    $('answerPageChip').textContent='PÁGINA '+pageNum+' · '+fileLabel(doc.name).toUpperCase();
+    $('answerText').value=currentAnswer();$('charCount').textContent=currentAnswer().length+' caracteres';
+    $('saveStatus').textContent='Guardado en este dispositivo';
+    $('clearAnswer').disabled=false;$('nextAnswer').disabled=false;
+    updateProgress();
+  }
+  function updateProgress(){
+    const total=docs.reduce((sum,d)=>sum+(d.pages||0),0);
+    let completed=0;
+    docs.forEach(d=>{for(let p=1;p<=(d.pages||0);p++){if((answers[d.id+'__'+p]||'').trim())completed++}});
+    const pct=total?Math.round(completed/total*100):0;
+    $('progressText').textContent=pct+'%';$('progressFill').style.width=pct+'%';
+    $('progressDetail').textContent=total?completed+' de '+total+' páginas con respuestas':'Agrega un PDF para comenzar.';
+  }
+  function changePage(delta){
+    if(!pdfDoc)return;
+    const next=pageNum+delta;if(next<1||next>pdfDoc.numPages)return;
+    pageNum=next;renderPage();
+  }
+  function exportAnswers(){
+    const docList=docs.map(d=>({archivo:d.name,paginas:d.pages,respuestas:Array.from({length:d.pages||0},(_,i)=>({pagina:i+1,respuesta:answers[d.id+'__'+(i+1)]||''})).filter(x=>x.respuesta.trim())}));
+    const data={cuadernillo:'Cuadernillo Digital',estudiante:studentName,exportado:new Date().toLocaleString('es-MX'),documentos:docList};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='mis-respuestas-cuadernillo.json';a.click();URL.revokeObjectURL(url);
+    showToast('Archivo de respuestas exportado.');
+  }
+  function printAnswers(){
+    const docList=docs.map(d=>({name:d.name,answers:Array.from({length:d.pages||0},(_,i)=>({page:i+1,text:answers[d.id+'__'+(i+1)]||''})).filter(x=>x.text.trim())})).filter(d=>d.answers.length);
+    const w=window.open('','_blank');if(!w){showToast('Permite las ventanas emergentes para imprimir.');return}
+    const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    w.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Mis respuestas</title><style>body{font:14px Arial,sans-serif;color:#222;max-width:800px;margin:35px auto;line-height:1.5}h1{font-size:25px}h2{font-size:18px;border-bottom:1px solid #ddd;padding-bottom:7px;margin-top:28px}.answer{white-space:pre-wrap;border:1px solid #ddd;border-radius:8px;padding:12px;margin:7px 0 18px}.muted{color:#666;font-size:12px}@media print{body{margin:0 15mm}}</style></head><body><h1>Mis respuestas · Cuadernillo Digital</h1><p>Estudiante: '+esc(studentName||'No indicado')+'</p><p class="muted">Impreso el '+esc(new Date().toLocaleString('es-MX'))+'</p>');
+    if(!docList.length)w.document.write('<p>Aún no hay respuestas escritas.</p>');
+    docList.forEach(d=>{w.document.write('<h2>'+esc(d.name)+'</h2>');d.answers.forEach(a=>w.document.write('<strong>Página '+a.page+'</strong><div class="answer">'+esc(a.text)+'</div>'))});
+    w.document.write('<script>window.onload=()=>window.print()<\/script></body></html>');w.document.close();
+  }
+  function removeDoc(id){
+    const doc=docs.find(d=>d.id===id);if(!doc)return;
+    if(!confirm('¿Quitar "'+doc.name+'" de esta sesión? Las respuestas guardadas para este archivo también se eliminarán.'))return;
+    docs=docs.filter(d=>d.id!==id);
+    Object.keys(answers).forEach(k=>{if(k.startsWith(id+'__'))delete answers[k]});
+    if(activeId===id){activeId=null;pdfDoc=null;renderToken++;if(docs.length)openDoc(docs[0].id);else{
+      $('docTitle').textContent='Vista del documento';$('pageCount').textContent='Página —';$('prevPage').disabled=true;$('nextPage').disabled=true;
+      $('pdfStage').innerHTML='<div class="pdf-placeholder"><div class="placeholder-art">📝</div><h3>Tu cuadernillo comienza aquí</h3><p>Agrega tus archivos PDF en el panel izquierdo.</p></div>';
+      $('docInfo').textContent='Todavía no hay documentos abiertos';$('answerPageChip').textContent='SIN PÁGINA SELECCIONADA';$('answerText').value='';$('answerText').disabled=true;$('clearAnswer').disabled=true;$('nextAnswer').disabled=true;
+    }}
+    persist();renderFileList();updateProgress();
+  }
+  $('pdfInput').addEventListener('change',e=>addFiles(e.target.files));
+  $('uploadZone').addEventListener('dragover',e=>{e.preventDefault();$('uploadZone').classList.add('drag')});
+  $('uploadZone').addEventListener('dragleave',()=>$('uploadZone').classList.remove('drag'));
+  $('uploadZone').addEventListener('drop',e=>{e.preventDefault();$('uploadZone').classList.remove('drag');addFiles(e.dataTransfer.files)});
+  $('prevPage').addEventListener('click',()=>changePage(-1));$('nextPage').addEventListener('click',()=>changePage(1));
+  $('addFieldBtn').addEventListener('click',()=>{if(!activeId){showToast('Primero abre un PDF.');return;}placingField=!placingField;updatePlaceMode();});
+  $('downloadFilledBtn').addEventListener('click',downloadFilledPdf);
+  $('nextAnswer').addEventListener('click',()=>changePage(1));
+  $('answerText').addEventListener('input',()=>{
+    if(!activeId)return;
+    answers[keyFor()]=$('answerText').value;$('charCount').textContent=$('answerText').value.length+' caracteres';
+    $('saveStatus').textContent='Guardando…';clearTimeout(saveTimer);saveTimer=setTimeout(persist,250);updateProgress();
+  });
+  $('studentName').addEventListener('input',()=>{studentName=$('studentName').value;clearTimeout(saveTimer);saveTimer=setTimeout(persist,250)});
+  $('clearAnswer').addEventListener('click',()=>{
+    if(!activeId)return;
+    if(currentAnswer()&&!confirm('¿Quieres borrar la respuesta de esta página?'))return;
+    delete answers[keyFor()];$('answerText').value='';$('charCount').textContent='0 caracteres';persist();showToast('Respuesta borrada.');
+  });
+  $('exportBtn').addEventListener('click',exportAnswers);$('printBtn').addEventListener('click',printAnswers);
+  window.addEventListener('resize',()=>{if(pdfDoc)renderPage()});
+  loadSaved();renderFileList();updateProgress();
 
-Durante una de estas reuniones, se discutieron diversos temas relacionados con la dinámica en las aulas. 
-
-Posteriormente, Ana y Caro, dos de las estudiantes representantes divulgaron información que involucraba comentarios presuntamente negativos realizados por el profesor de Matemática sobre Pablo, uno de sus alumnos.
-
-Al día siguiente, en plena clase, el Pablo confrontó al profesor de Matemática frente a sus compañeros, mencionando que se había enterado de dichos comentarios. 
-
-Este hecho puso al profesor en una posición incómoda y, visiblemente molesto, respondió de manera excesiva tanto hacia Ana y Caro, las estudiantes que compartieron la información como hacia Pablo.
-
-
-Tras el intercambio verbal, Pablo mostró enojo evidente, tomó su mochila de forma brusca y decidió abandonar la clase.  
-
-En su salida, golpeó accidentalmente a una compañera con la mochila, intensificando la tensión en el aula.
-
-
-Ana y Caro, decidieron informar a una supervisora sobre lo ocurrido, solicitando que el profesor de Matemática sea sancionado por su comportamiento.
-
-Ante los hechos, el profesor se reunió con el director de la escuela para pedir sanciones contra Ana y Caro, por divulgar la información y contra Pablo, por sus dichos y abandonar la clase de manera violenta.
-
-
-
-
-
-1. Describe la posición de cada parte implicada en el conflicto.
-Posición de Pablo, el joven que se va furioso de la clase:
-Pablo considera que el profesor hizo comentarios negativos sobre él y se siente ofendido, molesto y posiblemente humillado frente a sus compañeros. Cree que tiene derecho a pedir una explicación al profesor, aunque su manera de reaccionar y abandonar el salón no fue la más adecuada.
-Posición de Ana y Caro, las estudiantes que divulgaron la información:
-Ana y Caro consideran que Pablo tenía derecho a conocer los comentarios que presuntamente hizo el profesor sobre él. Sin embargo, deben reconocer que divulgar información sin verificarla o sin considerar las consecuencias puede generar malentendidos y conflictos.
-Posición del profesor de Matemáticas:
-El profesor considera que la conducta de Pablo fue una falta de respeto al confrontarlo frente al grupo y que Ana y Caro actuaron incorrectamente al divulgar información de una reunión escolar. Sin embargo, su reacción excesiva hacia los estudiantes tampoco fue adecuada y debe asumir la responsabilidad de su comportamiento.
-2. Escribe 3 preguntas que le harías a cada parte implicada para entender mejor sus acciones.
-Preguntas para Pablo:
-1. ¿Qué sentiste cuando te enteraste de los comentarios que supuestamente hizo el profesor sobre ti?
-2. ¿Por qué decidiste confrontar al profesor frente a tus compañeros en lugar de hablar con él en privado?
-3. ¿Qué podrías haber hecho para expresar tu inconformidad sin reaccionar con enojo ni abandonar la clase de esa manera?
-Preguntas para Ana y Caro:
-1. ¿Por qué decidieron compartir con Pablo la información que escucharon durante la reunión?
-2. ¿Estaban seguras de que los comentarios del profesor eran ciertos o verificaron la información antes de divulgarla?
-3. ¿Consideraron las posibles consecuencias que podría tener compartir esa información para Pablo y el profesor?
-Preguntas para el profesor de Matemáticas:
-1. ¿Qué sintió cuando Pablo lo confrontó frente a sus compañeros?
-2. ¿Por qué reaccionó de manera excesiva hacia Pablo, Ana y Caro en lugar de dialogar con ellos?
-3. ¿Cómo podría haber manejado la situación de una manera más tranquila y respetuosa?
-3. Imagina los argumentos de los jóvenes y del profesor. ¿Cómo argumentan sus acciones?
-Argumentos de Pablo:
-Pablo argumenta que tenía derecho a conocer los comentarios que supuestamente hizo el profesor sobre él, ya que se sintió ofendido y quiso defenderse. Considera que su enojo fue una reacción ante lo que percibió como una falta de respeto. Sin embargo, debe reconocer que pudo haber solicitado una conversación privada y expresar su molestia sin actuar impulsivamente.
-Argumentos de Ana y Caro:
-Ana y Caro argumentan que compartieron la información porque consideraron que Pablo debía saber lo que supuestamente se había dicho sobre él. Posiblemente pensaron que estaban ayudándolo, aunque no midieron las consecuencias de divulgar esos comentarios. Deben reconocer que era importante verificar la información y buscar una manera responsable de abordar la situación.
-Argumentos del profesor de Matemáticas:
-El profesor argumenta que se sintió cuestionado y faltado al respeto cuando Pablo lo confrontó frente a todo el grupo. También considera que Ana y Caro actuaron incorrectamente al divulgar información de la reunión. Sin embargo, aunque pudo sentirse molesto, debió mantener la calma, escuchar a los estudiantes y resolver el problema mediante el diálogo, sin reaccionar de manera excesiva.
+  // Carga automáticamente el PDF publicado junto a este HTML.
+  // Para que funcione, publica ambos archivos en el mismo sitio web.
+  fetch('libromte.pdf')
+    .then(response => {
+      if (!response.ok) throw new Error('No se encontró libromte.pdf');
+      return response.blob();
+    })
+    .then(blob => {
+      const archivo = new File([blob], 'libromte.pdf', { type: 'application/pdf' });
+      return addFiles([archivo]);
+    })
+    .catch(error => {
+      console.warn('No se pudo leer libromte.pdf con PDF.js; se intentará mostrarlo directamente.', error);
+      // Al abrir el HTML con doble clic (file://), el navegador bloquea fetch()
+      // por seguridad. El iframe sí permite mostrar el PDF vecino con el visor nativo.
+      const stage = $('pdfStage');
+      stage.innerHTML = '';
+      const frame = document.createElement('iframe');
+      frame.src = './libromte.pdf';
+      frame.title = 'Cuadernillo libromte.pdf';
+      frame.style.cssText = 'display:block;width:100%;height:75vh;min-height:520px;border:0;background:#fff';
+      stage.appendChild(frame);
+      $('docTitle').textContent = 'libromte.pdf';
+      $('docInfo').textContent = 'PDF abierto directamente. Para colocar campos rellenables y descargarlo contestado, abre la página mediante un servidor local o selecciona el PDF con “Agregar archivos PDF”.';
+    });
+})();
+</script>
+</body>
+</html>
